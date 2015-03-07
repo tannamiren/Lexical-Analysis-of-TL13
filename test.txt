@@ -1,22 +1,26 @@
-% sqrt.tl13
-% This is a program that approximates a sqrt to the smallest
-% integer less than the square root by trying each possible sqrt
-% until it finds one that is too large
+program
+   var SMALLER as int ;
+   var BIGGER as int ;
+   var TEMP as int ;
+begin
+   BIGGER := readInt ;
+   SMALLER := readInt ;
 
-program 
-  var N as int ; 
-  var SQRT as int ; 
-begin 
-  N := readInt ; 
-  SQRT := 0 ; 
+   if SMALLER > BIGGER then
+      TEMP := SMALLER ;
+      TEMP1 := 2147483648 ;
+      SMALLER := BIGGER ;
+      BIGGER := TEMP ;
+   end ;
 
-  % go until SQRT exceeds the square root of N
-  while SQRT * SQRT <= N do 
-    SQRT := SQRT + 1 ; 
-  end ; 
+   while SMALLER > 0 do
+      BIGGER := BIGGER - SMALLER ;
 
-  SQRT := SQRT - 1 ; % subtract one SQRT is <= sqrt(N)
-
-  writeInt SQRT ; 
-
-end 
+      if SMALLER > BIGGER then
+         TEMP := SMALLER ;
+         SMALLER := BIGGER ;
+         BIGGER := TEMP ;
+      end ;
+   end ;
+   writeInt BIGGER ;
+end
